@@ -93,44 +93,103 @@ https://gdg.leloeduk.com
 
 ## Contribuer
 
-Tous les membres du GDG Pointe-Noire peuvent contribuer au projet.
+Le site du GDG Pointe-Noire est un projet communautaire. **Tous les membres du GDG Pointe-Noire peuvent contribuer à son développement**, qu’il s’agisse de code, de contenu, de design, d’accessibilité ou d’améliorations de l’expérience utilisateur.
 
-Les modifications ne doivent pas être effectuées directement sur `main`. Chaque contribution doit passer par une **branche dédiée** puis une **Pull Request**.
+### Processus de contribution
 
-### 1. Créer une branche
+Les contributions suivent le processus suivant :
+
+**1. Créer une branche**
+
+Ne travaillez pas directement sur `main`. Créez une branche dédiée à votre modification :
 
 ```bash
 git checkout -b ma-modification
 ```
 
-Utilisez de préférence un nom qui décrit clairement votre modification, par exemple :
+Exemples :
 
 ```bash
-git checkout -b update-team
 git checkout -b fix-navigation
-git checkout -b add-event-section
+git checkout -b update-team
+git checkout -b add-events-section
 ```
 
-### 2. Effectuer les modifications
+**2. Effectuer et tester vos modifications**
 
-Modifiez le projet et vérifiez son fonctionnement localement avant de soumettre votre contribution.
+Apportez vos changements puis vérifiez que le projet fonctionne correctement en local :
 
-### 3. Envoyer la branche
+```bash
+npm run dev
+```
+
+Avant de soumettre votre contribution, assurez-vous notamment que :
+
+* le projet se lance correctement ;
+* les pages concernées fonctionnent ;
+* les traductions FR/EN restent synchronisées ;
+* aucune fonctionnalité existante n'est involontairement cassée.
+
+**3. Publier votre branche**
 
 ```bash
 git push -u origin ma-modification
 ```
 
-### 4. Ouvrir une Pull Request
+**4. Ouvrir une Pull Request**
 
-Ouvrez ensuite une Pull Request vers `main`.
+Depuis GitHub, ouvrez une **Pull Request vers `main`** en décrivant clairement :
 
-Chaque PR doit être revue et validée par l’un des responsables techniques avant d’être fusionnée.
+* ce que vous avez modifié ;
+* pourquoi la modification est nécessaire ;
+* les éventuels points nécessitant une attention particulière.
 
-### Responsables techniques
+**5. Faire relire la contribution**
+
+Toutes les Pull Requests doivent être examinées avant d’être fusionnées.
+
+La validation est assurée par :
 
 * **Responsable Technique** — [Styve Maba (Kaiser)](https://github.com/ksthecrowned)
 * **Adjointe Technique** — [Sara Emmanuelle Moudilou](https://github.com/Emma-17-2002)
+
+Une Pull Request peut être :
+
+* **validée et fusionnée** ;
+* **retournée pour modifications** ;
+* **discutée avant décision**, lorsqu’elle concerne une évolution importante du site.
+
+La fusion dans `main` ne doit donc être effectuée qu’après validation par l’un des deux responsables techniques.
+
+### Ce qui peut être proposé
+
+Les membres peuvent notamment contribuer à :
+
+* améliorer ou corriger le code ;
+* corriger des bugs ;
+* améliorer le responsive design ;
+* proposer des améliorations UI/UX ;
+* améliorer l’accessibilité ;
+* corriger ou enrichir les contenus ;
+* mettre à jour les informations de l’équipe ;
+* améliorer les traductions FR/EN ;
+* proposer de nouvelles sections ou fonctionnalités.
+
+Pour les changements importants qui modifient fortement l’architecture, le design ou le fonctionnement du site, il est préférable d’en discuter **avant de commencer le développement**, afin d’éviter de travailler sur une direction qui ne sera finalement pas retenue.
+
+### Règles à respecter
+
+* Ne pas modifier directement `main`.
+* Une branche = une modification ou un sujet clairement identifié.
+* Garder les Pull Requests aussi ciblées que possible.
+* Ne pas mélanger une refonte complète avec une petite correction sans raison particulière.
+* Ne pas introduire TypeScript avant le début de la migration prévue.
+* Ne pas introduire Tailwind CSS avant le début de la migration prévue.
+* Maintenir les traductions françaises et anglaises synchronisées.
+* Tester les modifications avant d’ouvrir une Pull Request.
+* Ne pas considérer le design ou les contenus actuels comme définitifs : ils peuvent évoluer avec les besoins du GDG.
+
+> **En cas de doute sur une modification importante, ouvrez d’abord une discussion ou contactez l’un des responsables techniques avant de commencer.**
 
 ## Règles importantes
 
