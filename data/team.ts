@@ -136,7 +136,7 @@ export const poles: TeamPerson[] = [
     name: "Elfid Donsem NDONGOSSOLO",
     initials: "ED",
     role: {
-      fr: "Responsable Communication & Réseaux Sociaux",
+      fr: "Resp. Communication & Réseaux Sociaux",
       en: "Communications & Social Media Lead",
     },
     profession: {
@@ -164,7 +164,7 @@ export const poles: TeamPerson[] = [
   {
     name: "Nevy Presty",
     initials: "NP",
-    role: { fr: "Marketing & Design", en: "Marketing & Design" },
+    role: { fr: "Resp. Marketing & Design", en: "Marketing & Design Lead" },
     profession: {
       fr: "Dev mobile · Étudiant · Professeur",
       en: "Mobile dev · Student · Teacher",
@@ -195,7 +195,7 @@ export const poles: TeamPerson[] = [
   {
     name: "Asnath Hasby",
     initials: "AH",
-    role: { fr: "Communauté & Membres", en: "Community & Members" },
+    role: { fr: "Resp. Communauté & Membres", en: "Community & Members Lead" },
     profession: {
       fr: "Étudiante en data science · Analyse de données",
       en: "Data science student · Data analysis",
@@ -242,7 +242,7 @@ export const poles: TeamPerson[] = [
   {
     name: "François Nsengimana",
     initials: "FN",
-    role: { fr: "Formation & Ateliers", en: "Training & Workshops" },
+    role: { fr: "Resp. Formation & Ateliers", en: "Training & Workshops Lead" },
     profession: { fr: "Ingénieur logiciel", en: "Software Engineer" },
     place: { fr: "Brazzaville, Congo", en: "Brazzaville, Congo" },
     photo: "/assets/team/nsengimana_francois.png",
