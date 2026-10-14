@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
-import { locales, defaultLocale } from "@/data/i18n";
+import { NextRequest, NextResponse } from "next/server";
+import { defaultLocale, isLocale } from "@/data/i18n";
 
 const COOKIE_NAME = "NEXT_LOCALE";
 
-function getPreferredLocale(request) {
+function getPreferredLocale(request: NextRequest) {
   const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
-  if (cookieLocale && locales.includes(cookieLocale)) return cookieLocale;
+  if (cookieLocale && isLocale(cookieLocale)) return cookieLocale;
 
   const acceptLanguage = request.headers.get("accept-language") || "";
   const preferred = acceptLanguage
@@ -14,15 +14,15 @@ function getPreferredLocale(request) {
 
   for (const lang of preferred) {
     const short = lang.slice(0, 2);
-    if (locales.includes(short)) return short;
+    if (isLocale(short)) return short;
   }
   return defaultLocale;
 }
 
-export function middleware(request) {
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const pathnameLocale = locales.find(
+  const pathnameLocale = (["fr", "en"] as const).find(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
 

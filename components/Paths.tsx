@@ -1,16 +1,17 @@
 import { whatsappLink } from "@/data/i18n";
 import { Building2, Code2, Mic2, Sprout } from "lucide-react";
+import type { Dictionary } from "@/data/i18n";
 
 // Cible de chaque CTA selon le parcours. "speaker" part vers le groupe
 // WhatsApp (canal de contact reel du groupe) ; les autres restent internes.
-const CTA_TARGETS = {
+const CTA_TARGETS: Record<string, { href: string; external?: boolean }> = {
   beginner: { href: "#rejoindre" },
   builder: { href: "#rejoindre" },
   speaker: { href: whatsappLink, external: true },
   organization: { href: "#partenaires" },
 };
 
-const PATH_ICONS = {
+const PATH_ICONS: Record<string, typeof Sprout> = {
   beginner: Sprout,
   builder: Code2,
   speaker: Mic2,
@@ -18,7 +19,7 @@ const PATH_ICONS = {
 };
 
 // Section immersive sombre : elle casse le rythme des sections claires.
-export default function Paths({ dict }) {
+export default function Paths({ dict }: { dict: Dictionary }) {
   const p = dict.paths;
 
   return (

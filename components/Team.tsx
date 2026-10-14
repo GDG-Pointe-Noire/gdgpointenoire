@@ -2,35 +2,42 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight, BriefcaseBusiness, MapPin, X } from "lucide-react";
-import { bureau, poles } from "@/data/team";
+import { bureau, poles, type TeamLink, type TeamPerson } from "@/data/team";
+import type { Dictionary, Locale, LocalizedText } from "@/data/i18n";
 
-function localize(field, lang) {
+function localize(
+  field: string | LocalizedText | undefined,
+  lang: Locale
+): string | undefined {
   if (field && typeof field === "object") return field[lang] || field.fr;
   return field;
 }
 
-function hasContent(value) {
+function hasContent(value: unknown): boolean {
   return typeof value === "string"
     ? value.trim().length > 0
     : Boolean(
         value &&
           typeof value === "object" &&
           Object.values(value).some(
-            (localized) => typeof localized === "string" && localized.trim()
+            (localized: unknown) =>
+              typeof localized === "string" && localized.trim()
           )
       );
 }
 
-function hasProfile(person) {
+function hasProfile(person: TeamPerson): boolean {
   return (
     hasContent(person.name) &&
     hasContent(person.role) &&
-    (hasContent(person.bio) || person.skills?.length > 0 || person.links?.length > 0)
+    (hasContent(person.bio) ||
+      Boolean(person.skills?.length) ||
+      Boolean(person.links?.length))
   );
 }
 
-function hasOpenRoleDetails(person) {
-  return (
+function hasOpenRoleDetails(person: TeamPerson): boolean {
+  return Boolean(
     person.open &&
     hasContent(person.name) &&
     hasContent(person.role) &&
@@ -38,11 +45,17 @@ function hasOpenRoleDetails(person) {
   );
 }
 
-function toneClass(person) {
+function toneClass(person: TeamPerson): string {
   return person.color ? ` c-${person.color}` : "";
 }
 
-function Avatar({ person, className = "" }) {
+function Avatar({
+  person,
+  className = "",
+}: {
+  person: TeamPerson;
+  className?: string;
+}) {
   return (
     <div className={`avatar${person.photo ? " has-photo" : ""}${toneClass(person)} ${className}`.trim()}>
       {person.photo ? <img src={person.photo} alt="" /> : person.open ? "?" : person.initials}
@@ -50,7 +63,7 @@ function Avatar({ person, className = "" }) {
   );
 }
 
-function Icon({ type }) {
+function Icon({ type }: { type: string }) {
   const common = { viewBox: "0 0 24 24", "aria-hidden": true, className: "link-icon" };
   switch (type) {
     case "github":
@@ -137,11 +150,27 @@ function Icon({ type }) {
   }
 }
 
-function linkLabel(link, labels) {
-  return link.label || labels[link.type] || link.type;
+function linkLabel(
+  link: TeamLink,
+  labels: Dictionary["team"]["links"]
+): string {
+  return (
+    link.label ||
+    (link.type in labels
+      ? labels[link.type as keyof typeof labels]
+      : link.type)
+  );
 }
 
-function LinkRow({ links, labels, withText = false }) {
+function LinkRow({
+  links,
+  labels,
+  withText = false,
+}: {
+  links: TeamLink[];
+  labels: Dictionary["team"]["links"];
+  withText?: boolean;
+}) {
   return (
     <ul className={`link-row${withText ? " labelled" : ""}`}>
       {links.map((link) => {
@@ -165,7 +194,13 @@ function LinkRow({ links, labels, withText = false }) {
   );
 }
 
-function SkillList({ skills, limit }) {
+function SkillList({
+  skills,
+  limit,
+}: {
+  skills: string[];
+  limit?: number;
+}) {
   const shown = limit ? skills.slice(0, limit) : skills;
   const extra = skills.length - shown.length;
   return (
@@ -178,7 +213,19 @@ function SkillList({ skills, limit }) {
   );
 }
 
-function MemberCard({ person, lang, t, onOpen, featured = false }) {
+function MemberCard({
+  person,
+  lang,
+  t,
+  onOpen,
+  featured = false,
+}: {
+  person: TeamPerson;
+  lang: Locale;
+  t: Dictionary["team"];
+  onOpen: (person: TeamPerson) => void;
+  featured?: boolean;
+}) {
   const name = localize(person.name, lang);
   const role = localize(person.role, lang);
   const bio = localize(person.bio, lang);
@@ -200,10 +247,10 @@ function MemberCard({ person, lang, t, onOpen, featured = false }) {
           {profession || "\u00a0"}
         </p>
         {bio && <p className="bio">{bio}</p>}
-        {person.skills?.length > 0 && (
+        {person.skills && person.skills.length > 0 && (
           <SkillList skills={person.skills} limit={4} />
         )}
-        {person.links?.length > 0 && (
+        {person.links && person.links.length > 0 && (
           <LinkRow links={person.links.slice(0, 4)} labels={t.links} />
         )}
         {person.assist && (
@@ -227,7 +274,7 @@ function MemberCard({ person, lang, t, onOpen, featured = false }) {
   );
 }
 
-function Seat({ person, lang }) {
+function Seat({ person, lang }: { person: TeamPerson; lang: Locale }) {
   const description = localize(person.description, lang);
 
   return (
@@ -240,8 +287,18 @@ function Seat({ person, lang }) {
   );
 }
 
-function ProfileDialog({ person, lang, t, onClose }) {
-  const ref = useRef(null);
+function ProfileDialog({
+  person,
+  lang,
+  t,
+  onClose,
+}: {
+  person: TeamPerson | null;
+  lang: Locale;
+  t: Dictionary["team"];
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
   useEffect(() => {
@@ -265,7 +322,7 @@ function ProfileDialog({ person, lang, t, onClose }) {
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(event) => {
-        if (event.target === ref.current) ref.current.close();
+        if (event.target === ref.current) ref.current?.close();
       }}
     >
       <article className={`profile-sheet${toneClass(person)}`}>
@@ -309,14 +366,14 @@ function ProfileDialog({ person, lang, t, onClose }) {
                 <p className="profile-bio">{bio}</p>
               </section>
             )}
-            {person.skills?.length > 0 && (
+            {person.skills && person.skills.length > 0 && (
               <section className="profile-block">
                 <h4>{t.skillsLabel}</h4>
                 <SkillList skills={person.skills} />
               </section>
             )}
           </div>
-          {person.links?.length > 0 && (
+          {person.links && person.links.length > 0 && (
             <aside className="profile-links">
               <h4>{t.linksLabel}</h4>
               <LinkRow links={person.links} labels={t.links} withText />
@@ -328,9 +385,15 @@ function ProfileDialog({ person, lang, t, onClose }) {
   );
 }
 
-export default function Team({ dict, lang }) {
+export default function Team({
+  dict,
+  lang,
+}: {
+  dict: Dictionary;
+  lang: Locale;
+}) {
   const t = dict.team;
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState<TeamPerson | null>(null);
   const lead = bureau.find((person) => !person.open && hasProfile(person));
   const bureauOpen = bureau.filter(hasOpenRoleDetails);
   // N'affiche que les membres avec assez d'infos (bio, competences ou liens).
@@ -361,7 +424,13 @@ export default function Team({ dict, lang }) {
         <div className="team-grid">
           {filled.map((person) => (
             <MemberCard
-              key={typeof person.name === "string" ? person.name : person.role.fr}
+              key={
+                typeof person.name === "string"
+                  ? person.name
+                  : typeof person.role === "string"
+                    ? person.role
+                    : person.role.fr
+              }
               person={person}
               lang={lang}
               t={t}

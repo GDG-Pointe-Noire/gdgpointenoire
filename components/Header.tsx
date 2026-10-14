@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Dictionary, Locale } from "@/data/i18n";
 
-export default function Header({ lang, dict }) {
+export default function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState("light");
 

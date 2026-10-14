@@ -1,8 +1,11 @@
 // Dictionnaires de traduction du site. Ajoutez une clé des deux côtés (fr et en)
 // pour garder les deux langues synchronisées.
 
-export const locales = ["fr", "en"];
-export const defaultLocale = "fr";
+export type Locale = "fr" | "en";
+export type LocalizedText = Record<Locale, string>;
+
+export const locales = ["fr", "en"] as const;
+export const defaultLocale: Locale = "fr";
 
 export const whatsappLink = "https://chat.whatsapp.com/BgX9MAKCB4DFr2entEsVrb";
 
@@ -400,6 +403,12 @@ const dictionaries = {
   },
 };
 
-export function getDictionary(locale) {
-  return dictionaries[locale] || dictionaries[defaultLocale];
+export type Dictionary = (typeof dictionaries)[Locale];
+
+export function isLocale(locale: string): locale is Locale {
+  return locale === "fr" || locale === "en";
+}
+
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale];
 }

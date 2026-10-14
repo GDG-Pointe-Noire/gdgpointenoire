@@ -4,10 +4,17 @@ import {
   formatEventDate,
 } from "@/data/events";
 import { whatsappLink } from "@/data/i18n";
+import type { Dictionary, Locale, LocalizedText } from "@/data/i18n";
 
-export default function Events({ dict, lang }) {
+export default function Events({
+  dict,
+  lang,
+}: {
+  dict: Dictionary;
+  lang: Locale;
+}) {
   const e = dict.events;
-  const t = (obj) => obj[lang] ?? obj.fr;
+  const t = (obj: LocalizedText | undefined) => obj?.[lang] ?? obj?.fr ?? "";
 
   return (
     <section id="evenements" className="alt">
@@ -105,10 +112,12 @@ export default function Events({ dict, lang }) {
                       {formatEventDate(ev.date, lang)}
                     </span>
                     <h4>{t(ev.title)}</h4>
-                    <p className="event-result">{t(ev.result)}</p>
-                    <span className="event-count">
-                      {e.participants.replace("{n}", String(ev.participants))}
-                    </span>
+                    {ev.result && <p className="event-result">{t(ev.result)}</p>}
+                    {ev.participants !== undefined && (
+                      <span className="event-count">
+                        {e.participants.replace("{n}", String(ev.participants))}
+                      </span>
+                    )}
                   </div>
                 </article>
               ))}

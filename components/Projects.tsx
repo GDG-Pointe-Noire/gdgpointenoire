@@ -1,10 +1,17 @@
 import { projects } from "@/data/projects";
+import type { Dictionary, Locale, LocalizedText } from "@/data/i18n";
 
 // Liste legere (lignes séparees par des filets) plutot qu'une grille de cartes :
 // le rythme change avec les autres sections.
-export default function Projects({ dict, lang }) {
+export default function Projects({
+  dict,
+  lang,
+}: {
+  dict: Dictionary;
+  lang: Locale;
+}) {
   const p = dict.projects;
-  const t = (obj) => obj[lang] ?? obj.fr;
+  const t = (obj: LocalizedText) => obj[lang] ?? obj.fr;
 
   return (
     <section id="projets">

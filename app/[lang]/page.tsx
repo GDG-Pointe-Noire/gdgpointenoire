@@ -10,11 +10,15 @@ import Members from "@/components/Members";
 import Partners from "@/components/Partners";
 import Join from "@/components/Join";
 import Footer from "@/components/Footer";
-import { getDictionary, locales, defaultLocale } from "@/data/i18n";
+import { getDictionary, isLocale, type Locale } from "@/data/i18n";
 
-export default async function Home({ params }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
   const { lang: rawLang } = await params;
-  const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
+  const lang: Locale = isLocale(rawLang) ? rawLang : "fr";
   const dict = getDictionary(lang);
 
   return (

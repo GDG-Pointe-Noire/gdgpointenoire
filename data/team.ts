@@ -2,7 +2,32 @@
 // `role`, `bio`, `profession` et `place` sont bilingues ({ fr, en }).
 // Les liens publics viennent des fiches data/team/*.md.
 
-export const bureau = [
+import type { LocalizedText } from "./i18n";
+
+export type TeamLink = {
+  type: string;
+  href: string;
+  label?: string;
+};
+
+export type TeamPerson = {
+  name: string | LocalizedText;
+  initials?: string;
+  aka?: string;
+  role: string | LocalizedText;
+  profession?: string | LocalizedText;
+  place?: string | LocalizedText;
+  photo?: string;
+  color?: "blue" | "red" | "yellow" | "green";
+  bio?: string | LocalizedText;
+  skills?: string[];
+  links?: TeamLink[];
+  assist?: string;
+  open?: boolean;
+  description?: string | LocalizedText;
+};
+
+export const bureau: TeamPerson[] = [
   {
     name: "Lelo Maurice",
     initials: "LM",
@@ -33,7 +58,7 @@ export const bureau = [
   },
 ];
 
-export const poles = [
+export const poles: TeamPerson[] = [
   {
     name: "Styve Maba",
     aka: "Kaiser",

@@ -1,6 +1,7 @@
 import { whatsappLink } from "@/data/i18n";
+import type { Dictionary } from "@/data/i18n";
 
-export default function Members({ dict }) {
+export default function Members({ dict }: { dict: Dictionary }) {
   const m = dict.members;
   return (
     <section id="membres">

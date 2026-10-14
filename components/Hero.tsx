@@ -1,7 +1,8 @@
 import { whatsappLink } from "@/data/i18n";
 import { featuredEvent, formatEventDate } from "@/data/events";
+import type { Dictionary, Locale } from "@/data/i18n";
 
-export default function Hero({ dict, lang }) {
+export default function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const h = dict.hero;
   const event = featuredEvent;
   const eventTitle = event ? event.title[lang] ?? event.title.fr : dict.events.emptyTitle;
@@ -42,7 +43,7 @@ export default function Hero({ dict, lang }) {
             <span className="hero-next-label">{h.nextLabel}</span>
             {event && (
               <span className="event-format">
-                {dict.events.formats[event.format]}
+                {dict.events.formats[event.format as keyof typeof dict.events.formats]}
               </span>
             )}
           </div>

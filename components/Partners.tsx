@@ -1,6 +1,7 @@
 import { whatsappLink } from "@/data/i18n";
+import type { Dictionary } from "@/data/i18n";
 
-export default function Partners({ dict }) {
+export default function Partners({ dict }: { dict: Dictionary }) {
   const p = dict.partners;
 
   return (

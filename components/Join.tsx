@@ -1,7 +1,8 @@
 import { ArrowUpRight, MapPin, MessageCircle, UsersRound } from "lucide-react";
 import { whatsappLink } from "@/data/i18n";
+import type { Dictionary } from "@/data/i18n";
 
-export default function Join({ dict }) {
+export default function Join({ dict }: { dict: Dictionary }) {
   const j = dict.join;
 
   return (

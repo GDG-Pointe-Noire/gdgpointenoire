@@ -3,7 +3,7 @@
 // remplacer par l'equipe (voir SPEC_UI_UX_CONTENU.md, section 12).
 // Aucun lien mort n'est affiche : registrationUrl vide -> CTA WhatsApp.
 
-export const events = [
+export const events: CommunityEvent[] = [
   {
     slug: "build-with-ai-pointe-noire",
     title: { fr: "Build with AI Pointe-Noire", en: "Build with AI Pointe-Noire" },
@@ -124,16 +124,38 @@ const MONTHS = {
 
 // Formate une date ISO "YYYY-MM-DD" sans passer par Date() : evite tout
 // decalage de fuseau horaire entre le build et l'affichage.
-export function formatEventDate(iso, lang = "fr") {
+export function formatEventDate(iso: string, lang: Locale = "fr") {
   const [year, month, day] = iso.split("-").map(Number);
-  const months = MONTHS[lang] || MONTHS.fr;
+  const months = MONTHS[lang];
   return `${day} ${months[month - 1]} ${year}`;
 }
 
 // Jour + mois courte pour la pastille de date, ex. "14 nov."
-export function formatEventDateShort(iso, lang = "fr") {
+export function formatEventDateShort(iso: string, lang: Locale = "fr") {
   const [year, month, day] = iso.split("-").map(Number);
-  const months = MONTHS[lang] || MONTHS.fr;
+  const months = MONTHS[lang];
   const short = months[month - 1].slice(0, 3);
   return `${day} ${short}`;
 }
+import type { Locale, LocalizedText } from "./i18n";
+
+export type EventFormat = "workshop" | "meetup" | "lab";
+export type EventStatus = "upcoming" | "past";
+
+export type CommunityEvent = {
+  slug: string;
+  title: LocalizedText;
+  date: string;
+  time: LocalizedText;
+  location: LocalizedText;
+  format: EventFormat;
+  level: LocalizedText;
+  tags: string[];
+  status: EventStatus;
+  registrationUrl: string;
+  image: string;
+  imageAlt: LocalizedText;
+  summary: LocalizedText;
+  participants?: number;
+  result?: LocalizedText;
+};

@@ -1,6 +1,7 @@
 import "../globals.css";
 import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
-import { locales, defaultLocale } from "@/data/i18n";
+import { isLocale, locales, type Locale } from "@/data/i18n";
+import type { ReactNode } from "react";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -18,7 +19,11 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
   const { lang } = await params;
   const isEn = lang === "en";
   return {
@@ -37,9 +42,15 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function LangLayout({ children, params }) {
+export default async function LangLayout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
   const { lang } = await params;
-  const htmlLang = locales.includes(lang) ? lang : defaultLocale;
+  const htmlLang: Locale = isLocale(lang) ? lang : "fr";
 
   return (
     <html lang={htmlLang} className={`${display.variable} ${sans.variable}`}>

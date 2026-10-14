@@ -1,4 +1,4 @@
-export default function Banner({ text }) {
+export default function Banner({ text }: { text: string }) {
   return (
     <div className="banner">
       <div className="container banner-inner">

@@ -1,10 +1,17 @@
 import { programs } from "@/data/programs";
+import type { Dictionary, Locale, LocalizedText } from "@/data/i18n";
 
 // Layout en lignes numerotees (pas une grille de cartes) pour varier le rythme
 // avec les sections About / Paths / Projects.
-export default function Programs({ dict, lang }) {
+export default function Programs({
+  dict,
+  lang,
+}: {
+  dict: Dictionary;
+  lang: Locale;
+}) {
   const p = dict.programs;
-  const t = (obj) => obj[lang] ?? obj.fr;
+  const t = (obj: LocalizedText) => obj[lang] ?? obj.fr;
 
   return (
     <section id="programmes" className="alt">

@@ -1,6 +1,7 @@
 import { siteLinks, whatsappLink } from "@/data/i18n";
+import type { Dictionary } from "@/data/i18n";
 
-export default function Footer({ dict }) {
+export default function Footer({ dict }: { dict: Dictionary }) {
   const labels = dict.footerLinks;
 
   // Seuls les liens non-placeholder sont affiches : pas de lien mort sur le
@@ -8,7 +9,7 @@ export default function Footer({ dict }) {
   const links = [
     { key: "github", label: labels.github, href: siteLinks.github.href },
     { key: "whatsapp", label: labels.whatsapp, href: whatsappLink },
-    ...["email", "facebook", "linkedin", "youtube"]
+    ...(["email", "facebook", "linkedin", "youtube"] as const)
       .filter((key) => !siteLinks[key].placeholder)
       .map((key) => ({ key, label: labels[key], href: siteLinks[key].href })),
   ];
