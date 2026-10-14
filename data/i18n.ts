@@ -46,12 +46,12 @@ const dictionaries = {
     banner:
       "Core Team 2025-2026 — des postes de l'équipe sont encore ouverts.",
     hero: {
-      badge: "Google Developer Group · Congo-Brazzaville",
+      badge: "Google Developer Group · Pointe-Noire",
       titleBefore: "GDG ",
       titleHighlight: "Pointe-Noire",
       titleAfter: "",
       text: "Apprendre, construire et connecter la communauté tech de Pointe-Noire autour des technologies Google.",
-      location: "Pointe-Noire, Congo-Brazzaville",
+      location: "Pointe-Noire",
       signals: [
         "Meetups, ateliers, labs, mentoring",
         "Ouvert aux débutants comme aux profils confirmés",
@@ -197,7 +197,7 @@ const dictionaries = {
       title: "La suite se construit ensemble.",
       text: "Rejoignez le groupe WhatsApp pour échanger avec la communauté, poser vos questions et être informé des prochains rendez-vous.",
       btn: "Rejoindre le groupe WhatsApp",
-      location: "Pointe-Noire, Congo-Brazzaville",
+      location: "Pointe-Noire",
       asideTitle: "Un premier pas, simplement.",
       asideText: "Pas besoin d’être expert : la communauté est ouverte aux curieux, aux personnes qui apprennent et à celles qui construisent déjà.",
       asideNote: "Échanges · Ateliers · Rencontres",
@@ -233,12 +233,12 @@ const dictionaries = {
     banner:
       "Core Team 2025-2026 — a few organizing roles are still open.",
     hero: {
-      badge: "Google Developer Group · Republic of Congo",
+      badge: "Google Developer Group · Pointe-Noire",
       titleBefore: "GDG ",
       titleHighlight: "Pointe-Noire",
       titleAfter: "",
       text: "Learn, build and connect Pointe-Noire's tech community around Google technologies.",
-      location: "Pointe-Noire, Republic of Congo",
+      location: "Pointe-Noire",
       signals: [
         "Meetups, workshops, labs, mentoring",
         "Open to beginners and experienced profiles alike",
@@ -384,7 +384,7 @@ const dictionaries = {
       title: "Let's build what comes next.",
       text: "Join the WhatsApp group to meet the community, ask questions and hear about upcoming meetups.",
       btn: "Join the WhatsApp group",
-      location: "Pointe-Noire, Republic of the Congo",
+      location: "Pointe-Noire",
       asideTitle: "Getting started is simple.",
       asideText: "You don't need to be an expert: our community is open to the curious, people who are learning and those already building.",
       asideNote: "Conversations · Workshops · Meetups",

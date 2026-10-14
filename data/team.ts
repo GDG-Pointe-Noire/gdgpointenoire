@@ -133,8 +133,30 @@ export const poles: TeamPerson[] = [
   {
     name: "Elfid Donsem NDONGOSSOLO",
     initials: "ED",
-    role: { fr: "Communication & Réseaux Sociaux", en: "Communications & Social Media" },
+    role: {
+      fr: "Responsable Communication & Réseaux Sociaux",
+      en: "Communications & Social Media Lead",
+    },
+    profession: {
+      fr: "Agent CFCO · Développeur mobile · Community manager",
+      en: "CFCO agent · Mobile developer · Community manager",
+    },
+    photo: "/assets/team/elfid_donsem.jpeg",
     color: "yellow",
+    bio: {
+      fr: "Agent CFCO, développeur mobile et community manager. Il est responsable de la communication et des réseaux sociaux du GDG Pointe-Noire.",
+      en: "CFCO agent, mobile developer and community manager. He leads communications and social media for GDG Pointe-Noire.",
+    },
+    skills: ["Flutter", "Dart"],
+    links: [
+      { type: "web", href: "https://elfid-donsem-ndongossolo.web.app/" },
+      { type: "github", href: "https://github.com/elfidonsem" },
+      { type: "linkedin", href: "https://www.linkedin.com/in/elfid-donsem-ndongossolo-3662351b4" },
+      { type: "facebook", href: "https://www.facebook.com/elfidonsem" },
+      { type: "youtube", href: "https://www.youtube.com/@ElikiaSolutions-o2q", label: "Elikia Solutions" },
+      { type: "youtube", href: "https://www.youtube.com/@ElikiaAcademy", label: "Elikia Academy" },
+      { type: "whatsapp", href: "https://wa.me/242050381841" },
+    ],
   },
   {
     name: "Nevy Presty",
@@ -166,10 +188,21 @@ export const poles: TeamPerson[] = [
     color: "blue",
   },
   {
-    name: "Honey Hasby",
-    initials: "HH",
+    name: "Asnath Hasby",
+    initials: "AH",
     role: { fr: "Communauté & Membres", en: "Community & Members" },
+    profession: {
+      fr: "Étudiante en data science · Analyse de données",
+      en: "Data science student · Data analysis",
+    },
+    photo: "/assets/team/asnath_hasby.jpg",
     color: "red",
+    bio: {
+      fr: "Étudiante en licence 3 de data science. Elle s'occupe de la communauté et des membres du GDG Pointe-Noire. Certifiée en infographie et en community management.",
+      en: "Third-year data science student. She looks after community and members for GDG Pointe-Noire. Certified in infographics and community management.",
+    },
+    skills: ["Python", "R", "SQL", "Power BI", "Excel / VBA", "Machine Learning"],
+    links: [{ type: "email", href: "mailto:hasbyasnath@gmail.com" }],
   },
   {
     name: { fr: "Poste libre", en: "Open position" },
@@ -177,9 +210,27 @@ export const poles: TeamPerson[] = [
     open: true,
   },
   {
-    name: { fr: "Poste libre", en: "Open position" },
+    name: "Lucrèce Nkouandzi",
+    initials: "LN",
     role: { fr: "Responsable Finances", en: "Finance Lead" },
-    open: true,
+    profession: {
+      fr: "Développeuse mobile · Technicienne en génie des procédés",
+      en: "Mobile developer · Process engineering technician",
+    },
+    photo: "/assets/team/lucrece.png",
+    color: "yellow",
+    bio: {
+      fr: "Développeuse mobile et technicienne en génie des procédés. Elle est responsable des finances du GDG Pointe-Noire.",
+      en: "Mobile developer and process engineering technician. She leads finances for GDG Pointe-Noire.",
+    },
+    skills: ["Flutter", "Dart", "Firebase"],
+    links: [
+      { type: "github", href: "https://github.com/nkouandzilucrece903-creator" },
+      { type: "linkedin", href: "https://www.linkedin.com/in/lucrèce-nkouandzi-3491a72b5" },
+      { type: "facebook", href: "https://www.facebook.com/lucrece.nkouandzi" },
+      { type: "email", href: "mailto:nkouandzilucrece903@gmail.com" },
+      { type: "whatsapp", href: "https://wa.me/242068068390" },
+    ],
   },
   {
     name: "François Nsengimana",
@@ -200,6 +251,43 @@ export const poles: TeamPerson[] = [
       { type: "youtube", href: "https://www.youtube.com/@IMANA47" },
       { type: "tiktok", href: "https://www.tiktok.com/@imana_47" },
       { type: "whatsapp", href: "https://wa.me/242069485154" },
+    ],
+  },
+  {
+    name: "Jude Caleb Nguie",
+    initials: "JC",
+    role: {
+      fr: "Assistant Formations & Ateliers",
+      en: "Training & Workshops Assistant",
+    },
+    profession: {
+      fr: "Développeur full stack · Formateur",
+      en: "Full-stack developer · Trainer",
+    },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
+    photo: "/assets/team/jude_caleb.jpeg",
+    color: "blue",
+    bio: {
+      fr: "Développeur full stack, formateur et entrepreneur. Il conçoit des applications web et mobiles, accompagne les apprenants et anime les formations et ateliers du GDG Pointe-Noire.",
+      en: "Full-stack developer, trainer and entrepreneur. He builds web and mobile apps, supports learners and runs training and workshops for GDG Pointe-Noire.",
+    },
+    skills: [
+      "JavaScript",
+      "React",
+      "React Native",
+      "Node.js",
+      "Flutter",
+      "PHP",
+      "Python",
+      "MySQL",
+      "Firebase",
+      "Docker",
+    ],
+    links: [
+      { type: "github", href: "https://github.com/28caleb" },
+      { type: "linkedin", href: "https://www.linkedin.com/in/jude-caleb-nguie-b41103328" },
+      { type: "email", href: "mailto:jude98caleb@gmail.com" },
+      { type: "whatsapp", href: "https://wa.me/242065623075" },
     ],
   },
   {

@@ -4,7 +4,7 @@ Rôle: Responsable technique
 
 Profession: Software Engineer · Full-Stack Developer
 
-Bio: Ingénieur Logiciel spécialisé dans le développement web et mobile, l’architecture logicielle et la création de produits numériques. Au sein du GDG Congo-Brazzaville, il contribue à la dimension technique du groupe et souhaite favoriser le partage de connaissances, l’expérimentation et la montée en compétence des développeurs locaux.
+Bio: Ingénieur Logiciel spécialisé dans le développement web et mobile, l’architecture logicielle et la création de produits numériques. Au sein du GDG Pointe-Noire, il contribue à la dimension technique du groupe et souhaite favoriser le partage de connaissances, l’expérimentation et la montée en compétence des développeurs locaux.
 
 Compétences:
 Web Development
