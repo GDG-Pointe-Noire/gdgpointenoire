@@ -245,7 +245,7 @@ export const poles: TeamPerson[] = [
     role: { fr: "Resp. Formation & Ateliers", en: "Training & Workshops Lead" },
     profession: { fr: "Ingénieur logiciel", en: "Software Engineer" },
     place: { fr: "Brazzaville, Congo", en: "Brazzaville, Congo" },
-    photo: "/assets/team/nsengimana_francois.png",
+    photo: "/assets/team/nsengimana_francois.jpg",
     color: "yellow",
     bio: {
       fr: "Ingénieur logiciel basé à Brazzaville. Il conçoit les formations et les ateliers du groupe.",
