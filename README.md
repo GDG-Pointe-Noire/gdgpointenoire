@@ -18,25 +18,20 @@ L’interface actuelle constitue donc une **base de travail**, et non une spéci
 Le projet utilise actuellement :
 
 * **Next.js** avec App Router
-* **JavaScript** (`.js` / `.jsx`)
+* **TypeScript** (`.ts` / `.tsx`)
 * **CSS natif**, principalement dans `app/globals.css`
 * **Internationalisation FR/EN**, avec détection de la langue du navigateur
-* **Cloudflare Workers** pour le déploiement
-* **Vinext** pour exécuter Next.js sur Cloudflare Workers
+* **Vercel** pour le déploiement continu
 * **[Bun](https://bun.sh/)** comme gestionnaire de paquets (`bun.lock`)
 
 ### Migrations prévues
 
-Deux évolutions techniques sont prévues :
+La migration de **JavaScript vers TypeScript** est terminée. La migration du CSS vers **Tailwind CSS** reste en attente.
 
-1. Migration de **JavaScript vers TypeScript**
-2. Migration du CSS actuel vers **Tailwind CSS**
+En attendant la migration vers Tailwind, merci de respecter l’organisation actuelle du projet :
 
-Ces migrations n’ayant pas encore commencé, merci de respecter l’organisation actuelle du projet :
-
-* les nouveaux fichiers restent en `.js` / `.jsx` ;
+* les nouveaux fichiers restent en `.ts` / `.tsx` ;
 * les nouveaux styles restent dans `app/globals.css` ;
-* ne mélangez pas JavaScript et TypeScript dans une même modification ;
 * n’introduisez pas Tailwind avant le début de la migration dédiée.
 
 ### Dépendances
@@ -73,19 +68,13 @@ http://localhost:3000
 
 ## Build et déploiement
 
-Pour générer le build destiné à Cloudflare Workers :
+Vercel déploie automatiquement les changements poussés sur la branche configurée et crée des déploiements de prévisualisation pour les Pull Requests. Pour vérifier le build localement :
 
 ```bash
-bun run build:vinext
+bun run build
 ```
 
-Pour déployer le projet :
-
-```bash
-bun run deploy:vinext
-```
-
-Le déploiement est destiné au site :
+Le site est accessible à l’adresse :
 
 ```text
 https://gdg.leloeduk.com
@@ -183,7 +172,6 @@ Pour les changements importants qui modifient fortement l’architecture, le des
 * Une branche = une modification ou un sujet clairement identifié.
 * Garder les Pull Requests aussi ciblées que possible.
 * Ne pas mélanger une refonte complète avec une petite correction sans raison particulière.
-* Ne pas introduire TypeScript avant le début de la migration prévue.
 * Ne pas introduire Tailwind CSS avant le début de la migration prévue.
 * Maintenir les traductions françaises et anglaises synchronisées.
 * Tester les modifications avant d’ouvrir une Pull Request.
@@ -200,7 +188,7 @@ Le site est bilingue.
 Les traductions sont centralisées dans :
 
 ```text
-data/i18n.js
+data/i18n.ts
 ```
 
 Toute nouvelle clé ajoutée dans une langue doit également être ajoutée dans l’autre.
@@ -210,7 +198,7 @@ Toute nouvelle clé ajoutée dans une langue doit également être ajoutée dans
 Les informations affichées sur le site sont définies dans :
 
 ```text
-data/team.js
+data/team.ts
 ```
 
 Les fiches sources des membres se trouvent dans :
@@ -233,13 +221,11 @@ Les contributions visant à améliorer l’interface, l’expérience utilisateu
 
 ### 🔤 TypeScript
 
-La migration vers TypeScript n’a pas encore commencé.
-
-Jusqu’à son lancement, les nouveaux fichiers doivent rester en :
+La migration vers TypeScript est terminée. Les nouveaux fichiers doivent rester en :
 
 ```text
-.js
-.jsx
+.ts
+.tsx
 ```
 
 ### 🎨 Tailwind CSS
@@ -265,20 +251,20 @@ app/globals.css
 ├── components/             # Composants React
 │
 ├── data/
-│   ├── i18n.js             # Traductions FR/EN
-│   ├── team.js             # Données de l'équipe
+│   ├── i18n.ts             # Traductions FR/EN
+│   ├── team.ts             # Données de l'équipe
 │   └── team/               # Fiches sources des membres
 │
 ├── public/
 │   └── assets/
 │       └── team/            # Photos de l'équipe
 │
-└── middleware.js            # Détection et redirection de langue
+└── middleware.ts            # Détection et redirection de langue
 ```
 
 ## Roadmap
 
-* [ ] Migrer le projet de JavaScript vers TypeScript
+* [x] Migrer le projet de JavaScript vers TypeScript
 * [ ] Migrer le CSS actuel vers Tailwind CSS
 * [ ] Maintenir les dépendances à jour
 * [ ] Faire évoluer progressivement le design et les contenus du site
