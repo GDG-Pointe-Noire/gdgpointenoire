@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { ArrowUpRight, BriefcaseBusiness, MapPin, X } from "lucide-react";
 import { bureau, poles } from "@/data/team";
 
 function localize(field, lang) {
@@ -8,8 +9,33 @@ function localize(field, lang) {
   return field;
 }
 
+function hasContent(value) {
+  return typeof value === "string"
+    ? value.trim().length > 0
+    : Boolean(
+        value &&
+          typeof value === "object" &&
+          Object.values(value).some(
+            (localized) => typeof localized === "string" && localized.trim()
+          )
+      );
+}
+
 function hasProfile(person) {
-  return Boolean(person.bio || person.skills?.length || person.links?.length);
+  return (
+    hasContent(person.name) &&
+    hasContent(person.role) &&
+    (hasContent(person.bio) || person.skills?.length > 0 || person.links?.length > 0)
+  );
+}
+
+function hasOpenRoleDetails(person) {
+  return (
+    person.open &&
+    hasContent(person.name) &&
+    hasContent(person.role) &&
+    hasContent(person.description)
+  );
 }
 
 function toneClass(person) {
@@ -160,28 +186,40 @@ function MemberCard({ person, lang, t, onOpen, featured = false }) {
   const profile = hasProfile(person);
 
   return (
-    <article className={`${featured ? "lead" : "member"}${toneClass(person)}`}>
-      <Avatar person={person} className={featured ? "portrait" : ""} />
+    <article className={`member${featured ? " lead" : ""}${toneClass(person)}`}>
+      <div className="member-portrait">
+        <Avatar person={person} />
+      </div>
       <div className="member-body">
         <h3>
           {name}
           {person.aka && <span className="aka">{person.aka}</span>}
         </h3>
         <p className="role">{role}</p>
-        {profession && <p className="profession">{profession}</p>}
+        <p className="profession" aria-hidden={!profession}>
+          {profession || "\u00a0"}
+        </p>
         {bio && <p className="bio">{bio}</p>}
         {person.skills?.length > 0 && (
-          <SkillList skills={person.skills} limit={featured ? 6 : 4} />
+          <SkillList skills={person.skills} limit={4} />
         )}
-        {person.links?.length > 0 && <LinkRow links={person.links} labels={t.links} />}
+        {person.links?.length > 0 && (
+          <LinkRow links={person.links.slice(0, 4)} labels={t.links} />
+        )}
         {person.assist && (
           <p className="assist">
             {t.assistLabel} : {person.assist}
           </p>
         )}
         {profile && (
-          <button type="button" className="profile-btn" onClick={() => onOpen(person)}>
-            {t.profile}
+          <button
+            type="button"
+            className="profile-btn"
+            aria-haspopup="dialog"
+            onClick={() => onOpen(person)}
+          >
+            <span>{t.profile}</span>
+            <ArrowUpRight size={17} aria-hidden="true" />
           </button>
         )}
       </div>
@@ -190,11 +228,14 @@ function MemberCard({ person, lang, t, onOpen, featured = false }) {
 }
 
 function Seat({ person, lang }) {
+  const description = localize(person.description, lang);
+
   return (
     <article className="seat">
       <Avatar person={{ ...person, open: true }} />
       <h3>{localize(person.name, lang)}</h3>
       <p className="role">{localize(person.role, lang)}</p>
+      {description && <p className="seat-description">{description}</p>}
     </article>
   );
 }
@@ -228,36 +269,60 @@ function ProfileDialog({ person, lang, t, onClose }) {
       }}
     >
       <article className={`profile-sheet${toneClass(person)}`}>
-        <div className="profile-toolbar">
-          <button type="button" className="profile-close" onClick={() => ref.current?.close()}>
-            {t.close}
-          </button>
-        </div>
-        <header className="profile-head">
-          <Avatar person={person} />
-          <div>
+        <div className="profile-banner" aria-hidden="true" />
+        <button
+          type="button"
+          className="profile-close"
+          aria-label={t.close}
+          title={t.close}
+          onClick={() => ref.current?.close()}
+        >
+          <X size={20} aria-hidden="true" />
+        </button>
+        <div className="profile-intro">
+          <Avatar person={person} className="profile-avatar" />
+          <div className="profile-identity">
             <h3 id={titleId}>
               {name}
               {person.aka && <span className="aka">{person.aka}</span>}
             </h3>
             <p className="role">{role}</p>
-            {profession && <p className="profession">{profession}</p>}
-            {place && <p className="place">{place}</p>}
+            {profession && (
+              <p className="profile-detail">
+                <BriefcaseBusiness size={16} aria-hidden="true" />
+                <span>{profession}</span>
+              </p>
+            )}
+            {place && (
+              <p className="profile-detail">
+                <MapPin size={16} aria-hidden="true" />
+                <span>{place}</span>
+              </p>
+            )}
           </div>
-        </header>
-        {bio && <p className="bio">{bio}</p>}
-        {person.skills?.length > 0 && (
-          <div className="profile-block">
-            <h4>{t.skillsLabel}</h4>
-            <SkillList skills={person.skills} />
+        </div>
+        <div className="profile-content">
+          <div className="profile-main">
+            {bio && (
+              <section className="profile-block">
+                <h4>{t.aboutLabel}</h4>
+                <p className="profile-bio">{bio}</p>
+              </section>
+            )}
+            {person.skills?.length > 0 && (
+              <section className="profile-block">
+                <h4>{t.skillsLabel}</h4>
+                <SkillList skills={person.skills} />
+              </section>
+            )}
           </div>
-        )}
-        {person.links?.length > 0 && (
-          <div className="profile-block">
-            <h4>{t.linksLabel}</h4>
-            <LinkRow links={person.links} labels={t.links} withText />
-          </div>
-        )}
+          {person.links?.length > 0 && (
+            <aside className="profile-links">
+              <h4>{t.linksLabel}</h4>
+              <LinkRow links={person.links} labels={t.links} withText />
+            </aside>
+          )}
+        </div>
       </article>
     </dialog>
   );
@@ -266,10 +331,13 @@ function ProfileDialog({ person, lang, t, onClose }) {
 export default function Team({ dict, lang }) {
   const t = dict.team;
   const [active, setActive] = useState(null);
-  const lead = bureau.find((person) => !person.open);
-  const bureauOpen = bureau.filter((person) => person.open);
-  const filled = poles.filter((person) => !person.open);
-  const openRoles = poles.filter((person) => person.open);
+  const lead = bureau.find((person) => !person.open && hasProfile(person));
+  const bureauOpen = bureau.filter(hasOpenRoleDetails);
+  // N'affiche que les membres avec assez d'infos (bio, competences ou liens).
+  const filled = poles.filter(
+    (person) => !person.open && hasProfile(person)
+  );
+  const openRoles = poles.filter(hasOpenRoleDetails);
 
   return (
     <section id="equipe" className="alt">
@@ -280,7 +348,7 @@ export default function Team({ dict, lang }) {
         </div>
 
         <p className="group-label">{t.bureauLabel}</p>
-        <div className="bureau-grid">
+        <div className={`bureau-grid${bureauOpen.length ? " has-open" : ""}`}>
           {lead && (
             <MemberCard person={lead} lang={lang} t={t} onOpen={setActive} featured />
           )}

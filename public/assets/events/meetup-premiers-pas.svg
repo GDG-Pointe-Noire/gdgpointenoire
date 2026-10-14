@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Affiche generique Meetup premiers pas dans la tech">
+  <defs>
+    <linearGradient id="mtbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ea4335"/>
+      <stop offset="1" stop-color="#b02a20"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#mtbg)"/>
+  <circle cx="1030" cy="170" r="120" fill="#ffffff" opacity="0.12"/>
+  <circle cx="160" cy="620" r="100" fill="#fbbc04" opacity="0.4"/>
+  <circle cx="1080" cy="610" r="80" fill="#4285f4" opacity="0.35"/>
+  <text x="90" y="330" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="700" fill="#ffffff">Premiers pas</text>
+  <text x="90" y="430" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="700" fill="#fde29b">dans la tech</text>
+  <text x="90" y="520" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#fce8e6">Témoignages · Orientation · Atelier CV</text>
+  <rect x="90" y="580" width="360" height="64" rx="32" fill="#ffffff"/>
+  <text x="270" y="622" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#ea4335">GDG Pointe-Noire</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" width="1600" height="600" role="img" aria-label="Visuel generique GDG Pointe-Noire">
+  <defs>
+    <linearGradient id="bandbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#172033"/>
+      <stop offset="1" stop-color="#0d1524"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="600" fill="url(#bandbg)"/>
+  <circle cx="180" cy="140" r="70" fill="#4285f4" opacity="0.9"/>
+  <circle cx="330" cy="440" r="46" fill="#ea4335" opacity="0.85"/>
+  <circle cx="1380" cy="150" r="56" fill="#fbbc04" opacity="0.9"/>
+  <circle cx="1460" cy="450" r="82" fill="#34a853" opacity="0.85"/>
+  <circle cx="1150" cy="520" r="30" fill="#4285f4" opacity="0.6"/>
+  <circle cx="520" cy="105" r="24" fill="#fbbc04" opacity="0.7"/>
+  <circle cx="980" cy="95" r="16" fill="#ea4335" opacity="0.7"/>
+  <text x="800" y="290" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="700" fill="#ffffff">GDG Pointe-Noire</text>
+  <text x="800" y="362" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#c9d4e3">Meetups · Ateliers · Labs · Mentoring</text>
+  <rect x="0" y="584" width="400" height="16" fill="#4285f4"/>
+  <rect x="400" y="584" width="400" height="16" fill="#ea4335"/>
+  <rect x="800" y="584" width="400" height="16" fill="#fbbc04"/>
+  <rect x="1200" y="584" width="400" height="16" fill="#34a853"/>
+</svg>

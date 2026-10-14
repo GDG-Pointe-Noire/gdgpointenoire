@@ -1,3 +1,5 @@
+import { whatsappLink } from "@/data/i18n";
+
 export default function Members({ dict }) {
   const m = dict.members;
   return (
@@ -7,9 +9,15 @@ export default function Members({ dict }) {
           <h2>{m.title}</h2>
           <p>{m.subtitle}</p>
         </div>
-        <div className="empty-roster">
+        <div className="empty-state">
+          <h3>{m.emptyTitle}</h3>
           <p>{m.note}</p>
-          <a className="btn ghost" href="#rejoindre">
+          <a
+            className="btn primary"
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {dict.hero.joinBtn}
           </a>
         </div>

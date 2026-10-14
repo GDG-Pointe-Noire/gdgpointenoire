@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vinext/cloudflare": "^1.0.0-beta.9",
+    "lucide-react": "^1.57.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -22,8 +23,11 @@
   "type": "module",
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.57.2",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
     "@vitejs/plugin-rsc": "^0.5.35",
+    "typescript": "^7.0.2",
     "vite": "^8.3.0",
     "wrangler": "^4.136.2"
   }

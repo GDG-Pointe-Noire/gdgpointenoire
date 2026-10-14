@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Affiche generique Build with AI Pointe-Noire">
+  <defs>
+    <linearGradient id="aibg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4285f4"/>
+      <stop offset="1" stop-color="#1a4fa0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#aibg)"/>
+  <circle cx="1020" cy="150" r="110" fill="#ffffff" opacity="0.12"/>
+  <circle cx="1090" cy="620" r="150" fill="#fbbc04" opacity="0.35"/>
+  <circle cx="140" cy="640" r="90" fill="#34a853" opacity="0.35"/>
+  <text x="90" y="330" font-family="Arial, Helvetica, sans-serif" font-size="110" font-weight="700" fill="#ffffff">Build with AI</text>
+  <text x="90" y="430" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#d2e3fc">Pointe-Noire</text>
+  <text x="90" y="520" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#e8f0fe">Google AI Studio · Web · Atelier pratique</text>
+  <rect x="90" y="580" width="360" height="64" rx="32" fill="#ffffff"/>
+  <text x="270" y="622" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#4285f4">GDG Pointe-Noire</text>
+</svg>
