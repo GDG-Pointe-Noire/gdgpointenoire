@@ -65,6 +65,7 @@ export const poles: TeamPerson[] = [
     initials: "SM",
     role: { fr: "Responsable Technique", en: "Technical Lead" },
     profession: { fr: "Ingénieur logiciel · Full-Stack", en: "Software Engineer · Full-Stack" },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
     photo: "/assets/team/kaiser_styve.png",
     color: "blue",
     bio: {
@@ -116,6 +117,7 @@ export const poles: TeamPerson[] = [
       fr: "Développeuse web · SEO · Community manager",
       en: "Web developer · SEO · Community manager",
     },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
     photo: "/assets/team/ruth_christy.jpg",
     color: "red",
     bio: {
@@ -141,6 +143,7 @@ export const poles: TeamPerson[] = [
       fr: "Agent CFCO · Développeur mobile · Community manager",
       en: "CFCO agent · Mobile developer · Community manager",
     },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
     photo: "/assets/team/elfid_donsem.jpeg",
     color: "yellow",
     bio: {
@@ -166,6 +169,7 @@ export const poles: TeamPerson[] = [
       fr: "Dev mobile · Étudiant · Professeur",
       en: "Mobile dev · Student · Teacher",
     },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
     photo: "/assets/team/nevy_presty.jpg",
     color: "green",
     bio: {
@@ -186,6 +190,7 @@ export const poles: TeamPerson[] = [
     role: { fr: "Partenariats & Sponsors", en: "Partnerships & Sponsors" },
     assist: "Rosty",
     color: "blue",
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
   },
   {
     name: "Asnath Hasby",
@@ -195,6 +200,7 @@ export const poles: TeamPerson[] = [
       fr: "Étudiante en data science · Analyse de données",
       en: "Data science student · Data analysis",
     },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
     photo: "/assets/team/asnath_hasby.jpg",
     color: "red",
     bio: {
@@ -217,6 +223,7 @@ export const poles: TeamPerson[] = [
       fr: "Développeuse mobile · Technicienne en génie des procédés",
       en: "Mobile developer · Process engineering technician",
     },
+    place: { fr: "Pointe-Noire, Congo", en: "Pointe-Noire, Congo" },
     photo: "/assets/team/lucrece.png",
     color: "yellow",
     bio: {
@@ -237,8 +244,8 @@ export const poles: TeamPerson[] = [
     initials: "FN",
     role: { fr: "Formation & Ateliers", en: "Training & Workshops" },
     profession: { fr: "Ingénieur logiciel", en: "Software Engineer" },
-    place: { fr: "Brazzaville, République du Congo", en: "Brazzaville, Republic of the Congo" },
-    photo: "/assets/team/nsengimana_francois.jpg",
+    place: { fr: "Brazzaville, Congo", en: "Brazzaville, Congo" },
+    photo: "/assets/team/nsengimana_francois.png",
     color: "yellow",
     bio: {
       fr: "Ingénieur logiciel basé à Brazzaville. Il conçoit les formations et les ateliers du groupe.",
