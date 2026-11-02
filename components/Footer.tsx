@@ -15,27 +15,27 @@ export default function Footer({ dict }: { dict: Dictionary }) {
   ];
 
   return (
-    <footer>
-      <div className="container footer-inner">
-        <span className="dots" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
+    <footer className="border-t border-line pt-7 pb-9">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-center gap-3 px-5 text-center text-[0.92rem] text-muted max-[640px]:flex-col">
+        <span className="flex gap-1" aria-hidden="true">
+          <i className="block size-2.5 rounded-full bg-brand-blue" />
+          <i className="block size-2.5 rounded-full bg-brand-red" />
+          <i className="block size-2.5 rounded-full bg-brand-yellow" />
+          <i className="block size-2.5 rounded-full bg-brand-green" />
         </span>
         <p>{dict.footer}</p>
       </div>
-      <div className="container footer-extra">
-        <ul className="footer-links">
+      <div className="mx-auto mt-[14px] flex w-full max-w-[1440px] flex-col items-center gap-2 px-5">
+        <ul className="flex list-none flex-wrap justify-center gap-x-[18px] gap-y-2">
           {links.map((link) => (
             <li key={link.key}>
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
+              <a className="text-[0.92rem] font-bold text-muted hover:text-brand-blue" href={link.href} target="_blank" rel="noopener noreferrer">
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
-        <p className="footer-mention">{dict.footerMention}</p>
+        <p className="max-w-[640px] text-center text-[0.85rem] text-muted">{dict.footerMention}</p>
       </div>
     </footer>
   );

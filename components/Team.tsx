@@ -4,6 +4,8 @@ import { useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight, BriefcaseBusiness, MapPin, X } from "lucide-react";
 import { bureau, poles, type TeamLink, type TeamPerson } from "@/data/team";
 import type { Dictionary, Locale, LocalizedText } from "@/data/i18n";
+import { colorToneClasses } from "@/components/tone-classes";
+import SectionTitle from "@/components/SectionTitle";
 
 function localize(
   field: string | LocalizedText | undefined,
@@ -46,7 +48,7 @@ function hasOpenRoleDetails(person: TeamPerson): boolean {
 }
 
 function toneClass(person: TeamPerson): string {
-  return person.color ? ` c-${person.color}` : "";
+  return person.color ? ` ${colorToneClasses[person.color]}` : "";
 }
 
 function Avatar({
@@ -57,14 +59,14 @@ function Avatar({
   className?: string;
 }) {
   return (
-    <div className={`avatar${person.photo ? " has-photo" : ""}${toneClass(person)} ${className}`.trim()}>
-      {person.photo ? <img src={person.photo} alt="" /> : person.open ? "?" : person.initials}
+    <div className={`mx-auto mb-[14px] grid size-[92px] aspect-square shrink-0 place-items-center overflow-hidden rounded-full bg-[var(--tone,#d5dbe6)] font-heading text-[1.45rem] font-bold text-white ${person.photo ? "p-[3px]" : person.color === "yellow" ? "text-[#3b2f00]" : ""}${toneClass(person)} ${className}`.trim()}>
+      {person.photo ? <img className="size-full min-h-0 min-w-0 max-h-full max-w-full rounded-full object-cover [object-position:center_18%]" src={person.photo} alt="" /> : person.open ? "?" : person.initials}
     </div>
   );
 }
 
 function Icon({ type }: { type: string }) {
-  const common = { viewBox: "0 0 24 24", "aria-hidden": true, className: "link-icon" };
+  const common = { viewBox: "0 0 24 24", "aria-hidden": true, className: "block size-4" };
   switch (type) {
     case "github":
       return (
@@ -166,19 +168,22 @@ function LinkRow({
   links,
   labels,
   withText = false,
+  yellowTone = false,
 }: {
   links: TeamLink[];
   labels: Dictionary["team"]["links"];
   withText?: boolean;
+  yellowTone?: boolean;
 }) {
   return (
-    <ul className={`link-row${withText ? " labelled" : ""}`}>
+    <ul className={`mt-[14px] flex list-none flex-wrap justify-center gap-2 ${withText ? "mt-0 justify-start" : ""}`}>
       {links.map((link) => {
         const label = linkLabel(link, labels);
         const external = link.type !== "email";
         return (
           <li key={link.href}>
             <a
+              className={`grid size-9 place-items-center rounded-full bg-page-muted text-text hover:bg-[var(--tone,var(--blue))] hover:text-white ${yellowTone ? "hover:text-[#3b2f00]" : ""} ${withText ? "inline-flex h-auto w-full max-w-full items-center justify-start gap-2 rounded-full border border-line bg-surface px-3 py-2 text-[0.9rem] font-bold hover:border-[var(--tone,var(--blue))] hover:bg-surface-hover hover:text-[var(--tone,var(--blue))]" : ""}`}
               href={link.href}
               aria-label={label}
               title={label}
@@ -197,18 +202,22 @@ function LinkRow({
 function SkillList({
   skills,
   limit,
+  compact = false,
+  profile = false,
 }: {
   skills: string[];
   limit?: number;
+  compact?: boolean;
+  profile?: boolean;
 }) {
   const shown = limit ? skills.slice(0, limit) : skills;
   const extra = skills.length - shown.length;
   return (
-    <ul className="skills">
+    <ul className={`mt-[14px] flex list-none flex-wrap justify-center gap-1.5 ${compact ? "mt-[10px] min-h-14 max-h-14 content-start overflow-hidden" : ""} ${profile ? "mt-0 justify-start" : ""}`}>
       {shown.map((skill) => (
-        <li key={skill}>{skill}</li>
+        <li className={`rounded-full bg-page-muted px-2.5 py-[3px] text-[0.78rem] font-semibold text-text ${profile ? "border border-line px-[11px] py-[5px]" : ""}`} key={skill}>{skill}</li>
       ))}
-      {extra > 0 && <li className="more">+{extra}</li>}
+      {extra > 0 && <li className={`rounded-full bg-page-muted px-2.5 py-[3px] text-[0.78rem] font-semibold text-muted ${profile ? "border border-line px-[11px] py-[5px]" : ""}`}>+{extra}</li>}
     </ul>
   );
 }
@@ -233,35 +242,35 @@ function MemberCard({
   const profile = hasProfile(person);
 
   return (
-    <article className={`member${featured ? " lead" : ""}${toneClass(person)}`}>
-      <div className="member-portrait">
-        <Avatar person={person} />
+    <article className={`relative flex h-[540px] flex-col items-center rounded-card border border-line border-t-[3px] border-t-[var(--tone,var(--blue))] bg-surface px-[22px] pt-6 pb-5 text-center shadow-[0_1px_0_rgba(23,32,51,0.03)] transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:shadow-[0_12px_28px_rgba(23,32,51,0.1)]${featured ? " lead" : ""}${toneClass(person)}`}>
+      <div className="mb-[14px] flex h-28 flex-none items-center justify-center">
+        <Avatar person={person} className={`!m-0 !size-[104px] ${person.photo ? "shadow-[0_0_0_3px_var(--tone,var(--blue))]" : ""}`} />
       </div>
-      <div className="member-body">
-        <h3>
+      <div className="flex min-h-0 w-full flex-1 flex-col items-center">
+        <h3 className="line-clamp-2 min-h-[2.4em] max-w-full text-[1.2rem] leading-[1.2] [text-wrap:balance]">
           {name}
-          {person.aka && <span className="aka">{person.aka}</span>}
+          {person.aka && <span className="ml-2 inline-block align-[2px] font-body-ui text-[0.78rem] font-semibold tracking-[0.04em] text-muted uppercase">{person.aka}</span>}
         </h3>
-        <p className="role">{role}</p>
-        <p className="profession" aria-hidden={!profession}>
+        <p className="mt-1 line-clamp-2 min-h-[2.4em] max-w-full text-[0.92rem] font-bold text-[var(--tone,var(--blue))]">{role}</p>
+        <p className="mt-0.5 line-clamp-2 min-h-[2.4em] max-w-full text-[0.9rem] text-muted" aria-hidden={!profession}>
           {profession || "\u00a0"}
         </p>
-        {bio && <p className="bio">{bio}</p>}
+        {bio && <p className="mt-2.5 line-clamp-3 min-h-[4.5em] overflow-hidden text-[0.98rem] text-text">{bio}</p>}
         {person.skills && person.skills.length > 0 && (
-          <SkillList skills={person.skills} limit={4} />
+          <SkillList skills={person.skills} limit={4} compact />
         )}
         {person.links && person.links.length > 0 && (
-          <LinkRow links={person.links.slice(0, 4)} labels={t.links} />
+          <LinkRow links={person.links.slice(0, 4)} labels={t.links} yellowTone={person.color === "yellow"} />
         )}
         {person.assist && (
-          <p className="assist">
+          <p className="mt-2.5 text-[0.88rem] text-muted">
             {t.assistLabel} : {person.assist}
           </p>
         )}
         {profile && (
           <button
             type="button"
-            className="profile-btn"
+            className="mt-auto inline-flex cursor-pointer items-center justify-center gap-2 self-center rounded-full border border-line bg-surface px-[14px] py-[9px] text-[0.92rem] font-bold text-[var(--tone,var(--blue))] transition-[border-color,background-color,transform] duration-200 hover:-translate-y-px hover:border-[var(--tone,var(--blue))] hover:bg-surface-hover"
             aria-haspopup="dialog"
             onClick={() => onOpen(person)}
           >
@@ -278,11 +287,11 @@ function Seat({ person, lang }: { person: TeamPerson; lang: Locale }) {
   const description = localize(person.description, lang);
 
   return (
-    <article className="seat">
-      <Avatar person={{ ...person, open: true }} />
-      <h3>{localize(person.name, lang)}</h3>
-      <p className="role">{localize(person.role, lang)}</p>
-      {description && <p className="seat-description">{description}</p>}
+    <article className="flex h-[540px] flex-col items-center justify-center rounded-card border border-dashed border-line bg-transparent px-[22px] pt-6 pb-5 text-center shadow-[0_1px_0_rgba(23,32,51,0.03)]">
+      <Avatar person={{ ...person, open: true }} className="!bg-page-muted !text-muted" />
+      <h3 className="text-[1.2rem] leading-[1.2] font-semibold text-muted">{localize(person.name, lang)}</h3>
+      <p className="mt-1 text-[0.92rem] font-bold text-brand-blue">{localize(person.role, lang)}</p>
+      {description && <p className="mt-1.5 text-[0.9rem] text-muted">{description}</p>}
     </article>
   );
 }
@@ -318,65 +327,65 @@ function ProfileDialog({
   return (
     <dialog
       ref={ref}
-      className="profile-dialog"
+      className="fixed left-1/2 top-1/2 m-0 max-h-[min(88vh,900px)] w-[min(760px,calc(100%-32px))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border-0 bg-transparent p-0 backdrop:bg-[rgba(12,18,29,0.68)] backdrop:backdrop-blur-[5px] max-[640px]:max-h-[92dvh] max-[640px]:w-[min(480px,calc(100%-28px))]"
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(event) => {
         if (event.target === ref.current) ref.current?.close();
       }}
     >
-      <article className={`profile-sheet${toneClass(person)}`}>
-        <div className="profile-banner" aria-hidden="true" />
+      <article className={`relative max-h-[min(88vh,900px)] overflow-auto rounded-3xl bg-surface text-left text-text max-[640px]:rounded-[22px] max-[640px]:pb-[max(26px,env(safe-area-inset-bottom))]${toneClass(person)}`}>
+        <div className="h-[120px] bg-[linear-gradient(120deg,color-mix(in_srgb,var(--tone,var(--blue))_84%,#172033),var(--tone,var(--blue)))] max-[640px]:h-24" aria-hidden="true" />
         <button
           type="button"
-          className="profile-close"
+          className="absolute top-4 right-4 grid size-[42px] cursor-pointer place-items-center rounded-full border border-white/50 bg-ink/35 text-white transition-[background-color,transform] duration-200 hover:rotate-1 hover:bg-ink/70"
           aria-label={t.close}
           title={t.close}
           onClick={() => ref.current?.close()}
         >
           <X size={20} aria-hidden="true" />
         </button>
-        <div className="profile-intro">
-          <Avatar person={person} className="profile-avatar" />
-          <div className="profile-identity">
-            <h3 id={titleId}>
+        <div className="mt-[-48px] flex items-end gap-[22px] px-[34px] pb-[26px] max-[640px]:mt-[-42px] max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-[14px] max-[640px]:px-[22px] max-[640px]:pb-[22px]">
+          <Avatar person={person} className="!m-0 !size-[124px] !border-[5px] !border-surface shadow-[0_8px_22px_rgba(23,32,51,0.16)] max-[640px]:!size-[100px]" />
+          <div className="min-w-0 pb-[3px]">
+            <h3 className="text-[clamp(1.45rem,4vw,2rem)] leading-[1.1]" id={titleId}>
               {name}
-              {person.aka && <span className="aka">{person.aka}</span>}
+              {person.aka && <span className="ml-2 inline-block align-[2px] font-body-ui text-[0.78rem] font-semibold tracking-[0.04em] text-muted uppercase">{person.aka}</span>}
             </h3>
-            <p className="role">{role}</p>
+            <p className="mt-[7px] text-base font-bold text-[var(--tone,var(--blue))]">{role}</p>
             {profession && (
-              <p className="profile-detail">
-                <BriefcaseBusiness size={16} aria-hidden="true" />
+              <p className="mt-2 mr-[14px] inline-flex items-center gap-[7px] text-[0.88rem] text-muted">
+                <BriefcaseBusiness className="shrink-0 text-[var(--tone,var(--blue))]" size={16} aria-hidden="true" />
                 <span>{profession}</span>
               </p>
             )}
             {place && (
-              <p className="profile-detail">
-                <MapPin size={16} aria-hidden="true" />
+              <p className="mt-2 mr-[14px] inline-flex items-center gap-[7px] text-[0.88rem] text-muted">
+                <MapPin className="shrink-0 text-[var(--tone,var(--blue))]" size={16} aria-hidden="true" />
                 <span>{place}</span>
               </p>
             )}
           </div>
         </div>
-        <div className="profile-content">
-          <div className="profile-main">
+        <div className="grid grid-cols-1 items-start gap-[18px] px-[22px] pb-[26px] min-[641px]:grid-cols-[minmax(0,1fr)_minmax(210px,0.72fr)] min-[641px]:gap-6 min-[641px]:px-[34px] min-[641px]:pb-[34px]">
+          <div className="min-w-0">
             {bio && (
-              <section className="profile-block">
-                <h4>{t.aboutLabel}</h4>
-                <p className="profile-bio">{bio}</p>
+              <section className="mt-3 p-0 first:mt-0">
+                <h4 className="mb-[7px] font-heading text-[0.78rem] tracking-[0.1em] text-muted uppercase">{t.aboutLabel}</h4>
+                <p className="max-w-[62ch] text-base leading-[1.7] text-text">{bio}</p>
               </section>
             )}
             {person.skills && person.skills.length > 0 && (
-              <section className="profile-block">
-                <h4>{t.skillsLabel}</h4>
-                <SkillList skills={person.skills} />
+              <section className="mt-3 p-0 first:mt-0">
+                <h4 className="mb-[7px] font-heading text-[0.78rem] tracking-[0.1em] text-muted uppercase">{t.skillsLabel}</h4>
+                <SkillList skills={person.skills} profile />
               </section>
             )}
           </div>
           {person.links && person.links.length > 0 && (
-            <aside className="profile-links">
-              <h4>{t.linksLabel}</h4>
-              <LinkRow links={person.links} labels={t.links} withText />
+            <aside className="min-w-0 rounded-2xl border border-line bg-page-muted p-[14px]">
+              <h4 className="mb-[7px] font-heading text-[0.78rem] tracking-[0.1em] text-muted uppercase">{t.linksLabel}</h4>
+              <LinkRow links={person.links} labels={t.links} withText yellowTone={person.color === "yellow"} />
             </aside>
           )}
         </div>
@@ -403,15 +412,12 @@ export default function Team({
   const openRoles = poles.filter(hasOpenRoleDetails);
 
   return (
-    <section id="equipe" className="alt">
-      <div className="container">
-        <div className="title">
-          <h2>{t.title}</h2>
-          <p>{t.subtitle}</p>
-        </div>
+    <section id="equipe" className="bg-page-muted py-[88px]">
+      <div className="mx-auto w-full max-w-[1440px] px-5">
+        <SectionTitle title={t.title} subtitle={t.subtitle} />
 
-        <p className="group-label">{t.bureauLabel}</p>
-        <div className={`bureau-grid${bureauOpen.length ? " has-open" : ""}`}>
+        <p className="mb-[14px] mt-[42px] font-heading text-xs font-bold tracking-[0.12em] text-muted uppercase first-of-type:mt-0">{t.bureauLabel}</p>
+        <div className={`grid grid-cols-1 items-stretch gap-4 min-[641px]:grid-cols-2 min-[901px]:grid-cols-3 ${bureauOpen.length ? "" : "min-[981px]:[&_.lead]:col-start-2"}`}>
           {lead && (
             <MemberCard person={lead} lang={lang} t={t} onOpen={setActive} featured />
           )}
@@ -420,8 +426,8 @@ export default function Team({
           ))}
         </div>
 
-        <p className="group-label">{t.polesLabel}</p>
-        <div className="team-grid">
+        <p className="mb-[14px] mt-[42px] font-heading text-xs font-bold tracking-[0.12em] text-muted uppercase">{t.polesLabel}</p>
+        <div className="grid grid-cols-1 items-stretch gap-4 min-[641px]:grid-cols-2 min-[901px]:grid-cols-3">
           {filled.map((person) => (
             <MemberCard
               key={
@@ -441,8 +447,8 @@ export default function Team({
 
         {openRoles.length > 0 && (
           <>
-            <p className="group-label">{t.openLabel}</p>
-            <div className="team-grid seats">
+            <p className="mb-[14px] mt-[42px] font-heading text-xs font-bold tracking-[0.12em] text-muted uppercase">{t.openLabel}</p>
+            <div className="grid grid-cols-1 items-stretch gap-4 min-[641px]:grid-cols-[repeat(2,minmax(0,280px))]">
               {openRoles.map((person) => (
                 <Seat key={localize(person.role, "fr")} person={person} lang={lang} />
               ))}
